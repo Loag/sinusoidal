@@ -19,9 +19,9 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
 
       - name: Build wave_forms library crate
-        run: cd wave_forms && cargo build --package wave_forms --lib
+        run: cd wave_forms && cargo build --release --package wave_forms --lib
         env:
           CARGO_REGISTRY_TOKEN: ${{ secrets.CRATES_IO }}
 
       - name: Build cli binary
-        run: cd cli && cargo build --release --bin cli
+        run: cd cli && cargo build --release --bin sinusoidal
