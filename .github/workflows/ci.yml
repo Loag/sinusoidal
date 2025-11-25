@@ -22,6 +22,7 @@ jobs:
         run: cd wave_forms && cargo publish --locked
         env:
           CARGO_REGISTRY_TOKEN: ${{ secrets.CRATES_IO }}
+        continue-on-error: true
 
       - name: Build cli binary
         run: cd cli && cargo build --release --bin sinusoidal
