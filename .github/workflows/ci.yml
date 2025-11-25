@@ -1,15 +1,15 @@
 name: CI
 
 on:
-  push:
-    branches: [main, master]
-  pull_request:
-    branches: [main, master]
+  release:
+    types: [created]
 
 jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout code
@@ -25,3 +25,8 @@ jobs:
 
       - name: Build cli binary
         run: cd cli && cargo build --release --bin sinusoidal
+
+      - name: Upload Release Asset
+        uses: softprops/action-gh-release@v1
+        with:
+          files: cli/target/release/sinusoidal
