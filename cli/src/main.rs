@@ -1,6 +1,8 @@
 use clap::{Parser, ValueEnum};
 use std::io::{self, Write};
 
+use wave_forms::{generate_sine_wave, generate_square_wave, generate_triangle_wave};
+
 #[derive(Parser)]
 struct Args {
     #[clap(short, long)]
@@ -28,14 +30,14 @@ fn main() {
     let args = Args::parse();
     let mut output = vec![0.0; args.samples];
     match args.waveform {
-        Waveform::Sine => waves::generate_sine_wave(
+        Waveform::Sine => generate_sine_wave(
             &mut output,
             args.frequency,
             args.sample_rate,
             args.amplitude,
         ),
-        Waveform::Square => waves::generate_square_wave(&mut output, args.frequency),
-        Waveform::Triangle => waves::generate_triangle_wave(&mut output, args.frequency),
+        Waveform::Square => generate_square_wave(&mut output, args.amplitude),
+        Waveform::Triangle => generate_triangle_wave(&mut output, args.amplitude),
     };
 
     if let Some(output_file) = args.output {
