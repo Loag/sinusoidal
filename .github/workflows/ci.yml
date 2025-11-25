@@ -19,7 +19,7 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
 
       - name: Build wave_forms library crate
-        run: cd wave_forms && cargo build --release --package wave_forms --lib
+        run: cd wave_forms && cargo publish --release --locked
         env:
           CARGO_REGISTRY_TOKEN: ${{ secrets.CRATES_IO }}
 
